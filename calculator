@@ -1,0 +1,68 @@
+import tkinter as tk
+
+if __name__ == "__main__":
+    entries = [[],[],[],[]]
+
+    def batAttrFetch(index):
+        result = float(entries[0][index].get())
+        return result
+    def pitchAttrFetch(index):
+        result = float(entries[1][index].get())
+        return result
+    def baseAttrFetch(index):
+        result = float(entries[2][index].get())
+        return result
+    def defAttrFetch(index):
+        result = float(entries[3][index].get())
+        return result
+
+    def calcBatting():
+        batStars = round(10*pow(batAttrFetch(0), 0.35) * pow(batAttrFetch(1), 0.35)* pow(max(1 - batAttrFetch(2), 0.01), 0.05) * pow(max(1 - batAttrFetch(3), 0.01), 0.05) * pow(batAttrFetch(4), 0.075) * pow(batAttrFetch(5), 0.075) * pow(batAttrFetch(6), 0.02))/2
+        batStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=batStars)
+        batStarsText.grid(row=0, column=(8))
+    def calcPitching():
+        pitchStars = round(10*pow(pitchAttrFetch(0), 0.4) * pow(pitchAttrFetch(1), 0.5) * pow(pitchAttrFetch(2), 0.15) * pow(pitchAttrFetch(3), 0.1) * pow(pitchAttrFetch(4), 0.025))/2
+        pitchStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=pitchStars)
+        pitchStarsText.grid(row=2, column=(8))
+    def calcBaserunning():
+        baseStars = round(10*pow(baseAttrFetch(0), 0.5) * pow(baseAttrFetch(1), 0.1) * pow(baseAttrFetch(2), 0.1) * pow(baseAttrFetch(3), 0.1) * pow(baseAttrFetch(4), 0.1))/2
+        baseStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=baseStars)
+        baseStarsText.grid(row=4, column=(8))
+    def calcDefense():
+        defStars = round(10*pow(defAttrFetch(0), 0.2) * pow(defAttrFetch(1), 0.2) * pow(defAttrFetch(2), 0.1) * pow(defAttrFetch(3), 0.1) * pow(defAttrFetch(4), 0.1))/2
+        defStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=defStars)
+        defStarsText.grid(row=6, column=(8))
+
+    gui = tk.Tk()
+    gui.configure(background='light blue')
+    gui.title('Stars Calculator')
+    gui.geometry('1000x200')
+
+    battingCalc = tk.Button(gui, text='Batting Stars', fg='black', bg='light blue', command=lambda: calcBatting(), height=1, width=15)
+    battingCalc.grid(sticky='S', row=0, column=0)
+    pitchingCalc = tk.Button(gui, text='Pitching Stars', fg='black', bg='light blue', command=lambda: calcPitching(), height=1, width=15)
+    pitchingCalc.grid(sticky='S', row=2, column=0)
+    baserunningCalc = tk.Button(gui, text='Baserunning Stars', fg='black', bg='light blue', command=lambda: calcBaserunning(), height=1, width=15)
+    baserunningCalc.grid(sticky='S', row=4, column=0)
+    defenseCalc = tk.Button(gui, text='Defense Stars', fg='black', bg='light blue', command=lambda: calcDefense(), height=1, width=15)
+    defenseCalc.grid(sticky='S', row=6, column=0)
+
+    battingAttrs = ['Thwackability', 'Divinity', 'Patheticism', 'Tragicness', 'Musclitude', 'Moxie', 'Martyrdom']
+    pitchingAttrs = ['Ruthlessness', 'Unthwackability', 'Overpowerment', 'Shakespearianism', 'Coldness', 'Suppression']
+    baserunningAttrs = ['Laserlikeness', 'Continuation', 'Base Thirst', 'Ground Friction', 'Indulgence']
+    defenseAttrs = ['Omniscience', 'Tenaciousness', 'Chasiness', 'Watchfulness', 'Anticapitalism']
+
+    attributes = [battingAttrs, pitchingAttrs, baserunningAttrs, defenseAttrs]
+
+    for typeIndex, attrType in enumerate(attributes):
+        for attrIndex, attr in enumerate(attrType):
+            attrBut = tk.Entry(gui, width=5)
+            attrBut.insert('insert', '0.5')
+            attrBut.grid(row=(2*typeIndex), column=(attrIndex+1))
+            attrText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=attr)
+            attrText.grid(row=(2*typeIndex + 1), column=(attrIndex+1))
+            entries[typeIndex].append(attrBut)
+        starsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text='Stars')
+        starsText.grid(row=(2*typeIndex + 1), column=(8))
+        
+    gui.mainloop()
