@@ -16,26 +16,38 @@ if __name__ == "__main__":
         return result
 
     def calcBatting():
-        batStars = round(10*pow(attrFetch('bat', 0), 0.35) * pow(attrFetch('bat', 1), 0.35)* pow(max(1 - attrFetch('bat', 2), 0.01), 0.05) * pow(max(1 - attrFetch('bat', 3), 0.01), 0.05) * pow(attrFetch('bat', 4), 0.075) * pow(attrFetch('bat', 5), 0.075) * pow(attrFetch('bat', 6), 0.02))/2
+        batRating = 10*pow(attrFetch('bat', 0), 0.35) * pow(attrFetch('bat', 1), 0.35)* pow(max(1 - attrFetch('bat', 2), 0.01), 0.05) * pow(max(1 - attrFetch('bat', 3), 0.01), 0.05) * pow(attrFetch('bat', 4), 0.075) * pow(attrFetch('bat', 5), 0.075) * pow(attrFetch('bat', 6), 0.02)
+        batStars = round(batRating)/2
         batStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=batStars)
         batStarsText.grid(row=0, column=(9))
+        batRatingText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=batRating)
+        batRatingText.grid(row=0, column=(10))
     def calcPitching():
-        pitchStars = round(10*pow(attrFetch('pitch', 0), 0.4) * pow(attrFetch('pitch',1), 0.5) * pow(attrFetch('pitch',2), 0.15) * pow(attrFetch('pitch',3), 0.1) * pow(attrFetch('pitch',4), 0.025))/2
+        pitchRating = 10*pow(attrFetch('pitch', 0), 0.4) * pow(attrFetch('pitch',1), 0.5) * pow(attrFetch('pitch',2), 0.15) * pow(attrFetch('pitch',3), 0.1) * pow(attrFetch('pitch',4), 0.025)
+        pitchStars = round(pitchRating)/2
         pitchStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=pitchStars)
         pitchStarsText.grid(row=2, column=(9))
+        pitchRatingText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=pitchRating)
+        pitchRatingText.grid(row=2, column=(10))
     def calcBaserunning():
-        baseStars = round(10*pow(attrFetch('base', 0), 0.5) * pow(attrFetch('base', 1), 0.1) * pow(attrFetch('base', 2), 0.1) * pow(attrFetch('base', 3), 0.1) * pow(attrFetch('base', 4), 0.1))/2
+        baseRating = 10*pow(attrFetch('base', 0), 0.5) * pow(attrFetch('base', 1), 0.1) * pow(attrFetch('base', 2), 0.1) * pow(attrFetch('base', 3), 0.1) * pow(attrFetch('base', 4), 0.1)
+        baseStars = round(baseRating)/2
         baseStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=baseStars)
         baseStarsText.grid(row=4, column=(9))
+        baseRatingText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=baseRating)
+        baseRatingText.grid(row=4, column=(10))
     def calcDefense():
-        defStars = round(10*pow(attrFetch('def', 0), 0.2) * pow(attrFetch('def', 1), 0.2) * pow(attrFetch('def', 2), 0.1) * pow(attrFetch('def', 3), 0.1) * pow(attrFetch('def', 4), 0.1))/2
+        defRating = 10*pow(attrFetch('def', 0), 0.2) * pow(attrFetch('def', 1), 0.2) * pow(attrFetch('def', 2), 0.1) * pow(attrFetch('def', 3), 0.1) * pow(attrFetch('def', 4), 0.1)
+        defStars = round(defRating)/2
         defStarsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=defStars)
         defStarsText.grid(row=6, column=(9))
+        defRatingText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text=defRating)
+        defRatingText.grid(row=6, column=(10))
 
     gui = tk.Tk()
     gui.configure(background='light blue')
     gui.title('Stars Calculator')
-    gui.geometry('1100x200')
+    gui.geometry('1250x200')
 
     battingAttrs = ['Thwackability', 'Divinity', 'Patheticism', 'Tragicness', 'Musclitude', 'Moxie', 'Martyrdom', 'Buoyancy']
     pitchingAttrs = ['Ruthlessness', 'Unthwackability', 'Overpowerment', 'Shakespearianism', 'Coldness', 'Suppression']
@@ -58,6 +70,8 @@ if __name__ == "__main__":
             entries[typeIndex].append(attrBut)
         starsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text='Stars')
         starsText.grid(row=row+1, column=(9))
+        starsText = tk.Label(gui, height=1, width=15, background='light blue', anchor='center', padx=1, pady=1, text='Rating')
+        starsText.grid(row=row+1, column=(10))
 
     gui.mainloop()
 
